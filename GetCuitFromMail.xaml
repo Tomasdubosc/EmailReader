@@ -1,11 +1,9 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ProcessMail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:str="clr-namespace:System.Text.RegularExpressions;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessMail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:str="clr-namespace:System.Text.RegularExpressions;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_mail" Type="InArgument(snm:MailMessage)" />
     <x:Property Name="out_cuit" Type="OutArgument(x:String)" />
-    <x:Property Name="in_mailUsername" Type="InArgument(x:String)" />
-    <x:Property Name="in_mailPassword" Type="InArgument(ss:SecureString)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1288.66666666667,1594.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>830,804.666666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -70,113 +68,48 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <If Condition="[in_mail.Subject.Contains(&quot;AFIP&quot;)]" sap:VirtualizedContainerService.HintSize="1298.66666666667,1390" sap2010:WorkflowViewState.IdRef="If_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="840,640" sap2010:WorkflowViewState.IdRef="Sequence_9">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="regexResult" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If.Then>
-      <Sequence sap:VirtualizedContainerService.HintSize="876.666666666667,1226" sap2010:WorkflowViewState.IdRef="Sequence_2">
-        <Sequence.Variables>
-          <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="regexResult" />
-        </Sequence.Variables>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <ui:AddLogFields DisplayName="Add Log Field: mailSubject" sap:VirtualizedContainerService.HintSize="834.666666666667,22" sap2010:WorkflowViewState.IdRef="AddLogFields_1">
-          <ui:AddLogFields.Fields>
-            <InArgument x:TypeArguments="x:String" x:Key="mailSubject">[in_mail.Subject]</InArgument>
-          </ui:AddLogFields.Fields>
-        </ui:AddLogFields>
-        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="834.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Proccesing email...&quot;]" />
-        <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="834.666666666667,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
-        <ui:RemoveLogFields DisplayName="Remove Log Field: mailSubject" sap:VirtualizedContainerService.HintSize="834.666666666667,22" sap2010:WorkflowViewState.IdRef="RemoveLogFields_1">
-          <ui:RemoveLogFields.Fields>
-            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-              <InArgument x:TypeArguments="x:String">mailSubject</InArgument>
-            </scg:List>
-          </ui:RemoveLogFields.Fields>
-        </ui:RemoveLogFields>
-        <ui:Matches BuilderPattern="(?&lt;=cuit\s*)[0-9]{2}-[0-9]+-[0-9]{1}" DisplayName="Match cuit" sap:VirtualizedContainerService.HintSize="834.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[in_mail.Headers(&quot;HTMLBody&quot;).ToString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;(?&lt;=cuit\\s*)[0-9]{2}-[0-9]+-[0-9]{1}&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="(?&lt;=cuit\s*)[0-9]{2}-[0-9]+-[0-9]{1}" RegexOption="IgnoreCase" Result="[regexResult]" />
-        <If Condition="[regexResult.count&gt;0]" sap:VirtualizedContainerService.HintSize="834.666666666667,714.666666666667" sap2010:WorkflowViewState.IdRef="If_2">
-          <If.Then>
-            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="412.666666666667,550.666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[regexResult]">
-              <ui:ForEach.Body>
-                <ActivityAction x:TypeArguments="x:Object">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="x:Object" Name="match" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,412" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="cuit" />
-                    </Sequence.Variables>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <ui:Replace DisplayName="Remove &quot;-&quot; from cuit" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="Replace_1" Input="[match.ToString]" IsBuilderTabModified="False" Pattern="-" RegexOption="IgnoreCase, Compiled" Result="[out_cuit]">
-                      <ui:Replace.Replacement>
-                        <InArgument x:TypeArguments="x:String">
-                          <Literal x:TypeArguments="x:String" Value="" />
-                        </InArgument>
-                      </ui:Replace.Replacement>
-                    </ui:Replace>
-                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Cuit obtained: &quot; &amp; out_cuit]" />
-                    <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Leidos&quot;" Email="[in_mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_1" MailFolder="Leidos" MailMessage="[in_Mail]" Port="993" SecureConnection="Auto" SecurePassword="[in_mailPassword]" Server="imap.gmail.com" />
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEach.Body>
-            </ui:ForEach>
-          </If.Then>
-          <If.Else>
-            <Sequence sap:VirtualizedContainerService.HintSize="376,415.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Error trying to get cuit&quot;]" />
-              <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Error&quot;" Email="[in_mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_2" MailFolder="Error" MailMessage="[in_mail]" Port="993" SecureConnection="Auto" SecurePassword="[in_mailPassword]" Server="imap.gmail.com" />
-              <Assign DisplayName="Assign cuit empty" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_2">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[out_cuit]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">
-                    <Literal x:TypeArguments="x:String" Value="" />
-                  </InArgument>
-                </Assign.Value>
-              </Assign>
-            </Sequence>
-          </If.Else>
-        </If>
-      </Sequence>
-    </If.Then>
-    <If.Else>
-      <Sequence sap:VirtualizedContainerService.HintSize="376,280.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Leidos&quot;" Email="[in_mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_4" MailFolder="Leidos" MailMessage="[in_Mail]" Port="993" SecureConnection="Auto" SecurePassword="[in_mailPassword]" Server="imap.gmail.com" />
-        <Assign DisplayName="Assign cuit empty" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_1">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[out_cuit]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String">
-              <Literal x:TypeArguments="x:String" Value="" />
-            </InArgument>
-          </Assign.Value>
-        </Assign>
-      </Sequence>
-    </If.Else>
-  </If>
+    <ui:Matches BuilderPattern="(?&lt;=cuit\s*)[0-9]{2}-[0-9]+-[0-9]{1}" DisplayName="Match cuit" sap:VirtualizedContainerService.HintSize="798,58.6666666666667" sap2010:WorkflowViewState.IdRef="Matches_2" Input="[in_mail.Headers(&quot;HTMLBody&quot;).ToString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;(?&lt;=cuit\\s*)[0-9]{2}-[0-9]+-[0-9]{1}&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="(?&lt;=cuit\s*)[0-9]{2}-[0-9]+-[0-9]{1}" RegexOption="IgnoreCase" Result="[regexResult]" />
+    <If Condition="[regexResult.count=1]" sap:VirtualizedContainerService.HintSize="798,449.333333333333" sap2010:WorkflowViewState.IdRef="If_3">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,285.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:Replace DisplayName="Remove &quot;-&quot; from cuit" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="Replace_3" Input="[regexResult.First.ToString]" IsBuilderTabModified="False" Pattern="-" RegexOption="IgnoreCase, Compiled" Result="[out_cuit]">
+            <ui:Replace.Replacement>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </ui:Replace.Replacement>
+          </ui:Replace>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Cuit obtained: &quot; &amp; out_cuit]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,248.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Error trying to get cuit&quot;]" />
+          <Throw Exception="[new BusinessRuleException(&quot;Could not get cuit from email&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
 </Activity>
