@@ -96,7 +96,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="Es el workflow principal desde el cual se hse invocan los otros workflows con el fin de leer todos los mails de notificaciones y cargar los cuits a procesar en la cola de trabajo." sap:VirtualizedContainerService.HintSize="1430.66666666667,4988.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_14">
+  <Sequence sap2010:Annotation.AnnotationText="Es el workflow principal desde el cual se invocan otros workflows con el fin de leer todos los mails de notificaciones y cargar los cuits a procesar en la cola de trabajo." sap:VirtualizedContainerService.HintSize="1430.66666666667,4988.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_14">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="config" />
     </Sequence.Variables>

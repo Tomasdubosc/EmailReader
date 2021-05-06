@@ -1,7 +1,7 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="InitiAllSettings" this:InitiAllSettings.in_ConfigSheets="[{&quot;Settings&quot;,&quot;Constants&quot;}]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ug="clr-namespace:UiPath.GSuite;assembly=UiPath.GSuite" xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property sap2010:Annotation.AnnotationText="Names of the sheets corresponding to settings and constants in the configuration file." Name="in_ConfigSheets" Type="InArgument(s:String[])" />
-    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="out_Config" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="Nombre de las hojas del ConfigFile donde se guardan las configuraciones y variables constantes" Name="in_ConfigSheets" Type="InArgument(s:String[])" />
+    <x:Property sap2010:Annotation.AnnotationText="Datos de configuración del proceso alojados en una estructura de diccionario." Name="out_Config" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -92,7 +92,7 @@
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Inicializa, popula y da como resultado un diccionario con todas las configuraciones que serán utilizadas en el proceso.&#xD;&#xA;Los valores correspondientes a &quot;Settings&quot; y &quot;Constants&quot; son tomadas directamente desde el config file, mientras que para los &quot;Assets&quot; se leerán los nombres y se obtendran los valores de Orchestrator." DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="681.333333333333,3424.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap2010:Annotation.AnnotationText="Inicializa, popula y da como resultado un diccionario con todas las configuraciones que serán utilizadas en el proceso.&#xA;Los valores correspondientes a &quot;Settings&quot; y &quot;Constants&quot; son tomadas directamente desde el config file, mientras que para los &quot;Assets&quot; se leerán los nombres y se obtendran los valores de Orchestrator." DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="681.333333333333,3424.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="gDriveIDOauth" />
       <Variable x:TypeArguments="ss:SecureString" Name="gDriveSecretOauth" />
