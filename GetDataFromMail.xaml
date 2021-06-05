@@ -3,8 +3,9 @@
     <x:Property sap2010:Annotation.AnnotationText="Mail del cual se obtendrá el cuit a procesar." Name="in_mail" Type="InArgument(snm:MailMessage)" />
     <x:Property sap2010:Annotation.AnnotationText="Cuit obtenido del mail." Name="out_cuit" Type="OutArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Expresión regular para obtener el cuit del mail." Name="in_regexCuit" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Devuelve la fecha del mail" Name="out_mailDate" Type="OutArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>830,850</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1208,1038</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -35,6 +36,7 @@
       <x:String>System.Xml.Linq</x:String>
       <x:String>System.IO</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System.Globalization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -69,9 +71,11 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Toma como entrada un mail y obtiene mediante una expresión regular el cuit contenido dentro. Si falla esta lectura o como resultado se obtiene mas de un cuit, se levantará un error." sap:VirtualizedContainerService.HintSize="840,685.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="Toma como entrada un mail y obtiene mediante una expresión regular el cuit contenido dentro. Si falla esta lectura o como resultado se obtiene mas de un cuit, se levantará un error." sap:VirtualizedContainerService.HintSize="839,873" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="regexResult" />
     </Sequence.Variables>
@@ -81,33 +85,49 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:Matches BuilderPattern="in_regexCuit" DisplayName="Match cuit" sap:VirtualizedContainerService.HintSize="798,58.6666666666667" sap2010:WorkflowViewState.IdRef="Matches_2" Input="[in_mail.Headers(&quot;HTMLBody&quot;).ToString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;in_regexCuit&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="[in_regexCuit]" RegexOption="IgnoreCase" Result="[regexResult]" />
-    <If Condition="[regexResult.count=1]" sap:VirtualizedContainerService.HintSize="798,449.333333333333" sap2010:WorkflowViewState.IdRef="If_3">
+    <ui:Matches BuilderPattern="in_regexCuit" DisplayName="Match cuit" sap:VirtualizedContainerService.HintSize="797,59" sap2010:WorkflowViewState.IdRef="Matches_2" Input="[in_mail.Headers(&quot;HTMLBody&quot;).ToString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;in_regexCuit&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="[in_regexCuit]" RegexOption="IgnoreCase" Result="[regexResult]" />
+    <Assign DisplayName="Set mailDate" sap:VirtualizedContainerService.HintSize="797,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_mailDate]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Split(Convert.ToDateTime(in_mail.Headers(“Date”).ToString).Date.ToString)(0)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Transform mailDate to dd/MM/yyyy" sap:VirtualizedContainerService.HintSize="797,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_mailDate]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[DateTime.ParseExact((out_mailDate).ToString.Trim,“MM/dd/yyyy”,System.Globalization.CultureInfo.InvariantCulture).ToString(“dd/MM/yyyy”)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[regexResult.count=1]" sap:VirtualizedContainerService.HintSize="797,440" sap2010:WorkflowViewState.IdRef="If_3">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,285.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <Sequence sap:VirtualizedContainerService.HintSize="376,282" sap2010:WorkflowViewState.IdRef="Sequence_10">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:Replace DisplayName="Remove &quot;-&quot; from cuit" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="Replace_3" Input="[regexResult.First.ToString]" IsBuilderTabModified="False" Pattern="-" RegexOption="IgnoreCase, Compiled" Result="[out_cuit]">
+          <ui:Replace DisplayName="Remove &quot;-&quot; from cuit" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="Replace_3" Input="[regexResult.First.ToString]" IsBuilderTabModified="False" Pattern="-" RegexOption="IgnoreCase, Compiled" Result="[out_cuit]">
             <ui:Replace.Replacement>
               <InArgument x:TypeArguments="x:String">
                 <Literal x:TypeArguments="x:String" Value="" />
               </InArgument>
             </ui:Replace.Replacement>
           </ui:Replace>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Cuit obtained: &quot; &amp; out_cuit]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Cuit obtained: &quot; &amp; out_cuit]" />
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,248.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Sequence sap:VirtualizedContainerService.HintSize="376,245" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Error trying to get cuit&quot;]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Error trying to get cuit&quot;]" />
           <Throw Exception="[new BusinessRuleException(&quot;Could not get cuit from email&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
         </Sequence>
       </If.Else>
