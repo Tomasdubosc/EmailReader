@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1884,5439" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1884,5501" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="45">
       <x:String>System.Activities</x:String>
@@ -97,7 +97,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="Es el workflow principal desde el cual se invocan otros workflows con el fin de leer todos los mails de notificaciones y cargar los cuits a procesar en la cola de trabajo." sap:VirtualizedContainerService.HintSize="1894,5274" sap2010:WorkflowViewState.IdRef="Sequence_14">
+  <Sequence sap2010:Annotation.AnnotationText="Es el workflow principal desde el cual se invocan otros workflows con el fin de leer todos los mails de notificaciones y cargar los cuits a procesar en la cola de trabajo." sap:VirtualizedContainerService.HintSize="1894,5336" sap2010:WorkflowViewState.IdRef="Sequence_14">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="config" />
     </Sequence.Variables>
@@ -114,7 +114,7 @@
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[config]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1852,4999" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1852,5061" sap2010:WorkflowViewState.IdRef="TryCatch_4">
       <TryCatch.Variables>
         <Variable x:TypeArguments="x:String" Name="mailBody" />
         <Variable x:TypeArguments="x:String" Name="mailUsername" />
@@ -128,7 +128,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="1814,4216" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence sap:VirtualizedContainerService.HintSize="1814,4278" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <Sequence.Variables>
             <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="messages" />
             <Variable x:TypeArguments="sd:DataTable" Name="blacklist" />
@@ -147,13 +147,13 @@
           </ui:InvokeWorkflowFile>
           <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[config(&quot;emailCredential&quot;).ToString]" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="1772,79" sap2010:WorkflowViewState.IdRef="GetRobotCredential_5" Password="[mailPassword]" Username="[mailUsername]" />
           <ui:GetIMAPMailMessages FilterExpression="{x:Null}" Password="{x:Null}" TimeoutMS="{x:Null}" DeleteMessages="False" DisplayName="Get IMAP Mail Messages" Email="[mailUsername]" EnableSSL="True" FilterExpressionCharacterSet="US-ASCII" sap:VirtualizedContainerService.HintSize="1772,22" sap2010:WorkflowViewState.IdRef="GetIMAPMailMessages_2" MailFolder="Inbox" MarkAsRead="False" Messages="[messages]" OnlyUnreadMessages="False" OrderByDate="NewestFirst" Port="993" SecureConnection="Auto" SecurePassword="[mailPassword]" Server="imap.gmail.com" Top="15" />
-          <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1772,3491" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[messages]">
+          <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1772,3553" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[messages]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="snm:MailMessage">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="mail" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1736,3357" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1736,3419" sap2010:WorkflowViewState.IdRef="Sequence_12">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Name="cuit" />
                     <Variable x:TypeArguments="x:String" Default="Cola" Name="queueName" />
@@ -178,17 +178,17 @@
                       </scg:List>
                     </ui:RemoveLogFields.Fields>
                   </ui:RemoveLogFields>
-                  <If Condition="[mail.Subject.Contains(config(&quot;notificationSubjectWildcard&quot;).ToString) and mail.Sender.Address = config(&quot;notificationEmail&quot;).ToString]" sap:VirtualizedContainerService.HintSize="1694,2948" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If Condition="[mail.Subject.Contains(config(&quot;notificationSubjectWildcard&quot;).ToString) and mail.Sender.Address = config(&quot;notificationEmail&quot;).ToString]" sap:VirtualizedContainerService.HintSize="1694,3010" sap2010:WorkflowViewState.IdRef="If_3">
                     <If.Then>
-                      <Sequence sap:VirtualizedContainerService.HintSize="1169,2790" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <Sequence sap:VirtualizedContainerService.HintSize="1169,2852" sap2010:WorkflowViewState.IdRef="Sequence_11">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1127,2698" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1127,2760" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                           <TryCatch.Try>
-                            <Sequence sap:VirtualizedContainerService.HintSize="1089,1503" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                            <Sequence sap:VirtualizedContainerService.HintSize="1089,1565" sap2010:WorkflowViewState.IdRef="Sequence_9">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="x:Int32" Name="row" />
                                 <Variable x:TypeArguments="x:String" Name="mailDate" />
@@ -200,22 +200,14 @@
                               </sap:WorkflowViewStateService.ViewState>
                               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetDataFromMail workflow" sap:VirtualizedContainerService.HintSize="1047,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="GetDataFromMail.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_mail">
-                                    <mva:VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="mail" />
-                                  </InArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="out_cuit">
-                                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="cuit" />
-                                  </OutArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="in_regexCuit">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="config(&quot;regexCuit&quot;).ToString" />
-                                  </InArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="out_mailDate">
-                                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="mailDate" />
-                                  </OutArgument>
+                                  <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_mail">[mail]</InArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_cuit">[cuit]</OutArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_regexCuit">[config("regexCuit").ToString]</InArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_mailDate">[mailDate]</OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
                               <ui:LookupDataTable CellValue="{x:Null}" LookupColumnIndex="{x:Null}" LookupDataColumn="{x:Null}" TargetColumnIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[blacklist]" DisplayName="Search cuit in Blacklist" sap:VirtualizedContainerService.HintSize="1047,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_1" LookupColumnName="Cuit" LookupValue="[cuit]" RowIndex="[row]" />
-                              <If Condition="[row&lt;0]" sap:VirtualizedContainerService.HintSize="1047,1197" sap2010:WorkflowViewState.IdRef="If_4">
+                              <If Condition="[row&lt;0]" sap:VirtualizedContainerService.HintSize="1047,1259" sap2010:WorkflowViewState.IdRef="If_4">
                                 <If.Then>
                                   <Sequence sap:VirtualizedContainerService.HintSize="480,878" sap2010:WorkflowViewState.IdRef="Sequence_20">
                                     <sap:WorkflowViewStateService.ViewState>
@@ -230,6 +222,9 @@
                                         </InArgument>
                                         <InArgument x:TypeArguments="x:String" x:Key="notificationDate">
                                           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailDate" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="isBlacklisted">
+                                          <Literal x:TypeArguments="x:Boolean" />
                                         </InArgument>
                                       </ui:AddQueueItem.ItemInformation>
                                     </ui:AddQueueItem>
@@ -265,13 +260,26 @@
                                   </Sequence>
                                 </If.Then>
                                 <If.Else>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="522,1039" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                  <Sequence sap:VirtualizedContainerService.HintSize="522,1101" sap2010:WorkflowViewState.IdRef="Sequence_19">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="480,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;The cuit: &quot; + cuit + &quot; was not added to the work queue as it is blacklisted&quot;]" />
+                                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="480,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_3" Priority="Normal" QueueType="[config(&quot;OrchestratorQueueName&quot;).ToString]" Reference="[cuit]">
+                                      <ui:AddQueueItem.ItemInformation>
+                                        <InArgument x:TypeArguments="x:String" x:Key="cuit">
+                                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="cuit" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="notificationDate">
+                                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailDate" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="isBlacklisted">
+                                          <Literal x:TypeArguments="x:Boolean" Value="True" />
+                                        </InArgument>
+                                      </ui:AddQueueItem.ItemInformation>
+                                    </ui:AddQueueItem>
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="480,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;The cuit: &quot; + cuit + &quot; was added to the work queue as blacklisted&quot;]" />
                                     <Sequence sap:VirtualizedContainerService.HintSize="480,816" sap2010:WorkflowViewState.IdRef="Sequence_18">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -294,7 +302,7 @@
                                           <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,104" sap2010:WorkflowViewState.IdRef="Catch`1_9">
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
