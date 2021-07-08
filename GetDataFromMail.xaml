@@ -5,7 +5,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Expresión regular para obtener el cuit del mail." Name="in_regexCuit" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Devuelve la fecha del mail" Name="out_mailDate" Type="OutArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1208,1038</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,938</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -128,7 +128,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Error trying to get cuit&quot;]" />
-          <Throw Exception="[new BusinessRuleException(&quot;Could not get cuit from email&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+          <Throw Exception="[new BusinessRuleException(&quot;No se pudo obtener cuit del mail procesado&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
         </Sequence>
       </If.Else>
     </If>
