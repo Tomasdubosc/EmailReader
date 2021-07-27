@@ -1,6 +1,6 @@
 {
   "name": "Dispatcher",
-  "description": "Blank Process",
+  "description": "Proceso que obtiene y carga notificaciones AFIP en cola de trabajo para Performer",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.10.3-preview]",
