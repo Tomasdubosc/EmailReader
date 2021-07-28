@@ -3,11 +3,11 @@
   "description": "Proceso que obtiene y carga notificaciones AFIP en cola de trabajo para Performer",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.Excel.Activities": "[2.10.3-preview]",
-    "UiPath.GSuite.Activities": "[1.10.0-preview]",
-    "UiPath.Mail.Activities": "[1.10.3-preview]",
-    "UiPath.System.Activities": "[21.4.0-preview]",
-    "UiPath.UIAutomation.Activities": "[21.4.0-preview]"
+    "UiPath.Excel.Activities": "[2.11.0-preview]",
+    "UiPath.GSuite.Activities": "[1.11.0]",
+    "UiPath.Mail.Activities": "[1.11.0-preview]",
+    "UiPath.System.Activities": "[21.6.1-preview]",
+    "UiPath.UIAutomation.Activities": "[21.6.1-preview]"
   },
   "webServices": [],
   "entitiesStores": [],
