@@ -1,11 +1,11 @@
-﻿<Activity mc:Ignorable="sap sap2010" x:Class="ProcessMail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:str="clr-namespace:System.Text.RegularExpressions;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessMail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:str="clr-namespace:System.Text.RegularExpressions;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Mail del cual se obtendrá el cuit a procesar." Name="in_mail" Type="InArgument(snm:MailMessage)" />
     <x:Property sap2010:Annotation.AnnotationText="Cuit obtenido del mail." Name="out_cuit" Type="OutArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Expresión regular para obtener el cuit del mail." Name="in_regexCuit" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Devuelve la fecha del mail" Name="out_mailDate" Type="OutArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>829,938</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,938</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -72,6 +72,7 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.GSuite.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Toma como entrada un mail y obtiene mediante una expresión regular el cuit contenido dentro. Si falla esta lectura o como resultado se obtiene mas de un cuit, se levantará un error." sap:VirtualizedContainerService.HintSize="839,873" sap2010:WorkflowViewState.IdRef="Sequence_9">
@@ -90,7 +91,7 @@
         <OutArgument x:TypeArguments="x:String">[out_mailDate]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[Split(Convert.ToDateTime(in_mail.Headers(“Date”).ToString).Date.ToString)(0)]</InArgument>
+        <InArgument x:TypeArguments="x:String">[Split(Convert.ToDateTime(in_mail.Headers("Date")).AddHours(-3).ToString)(0)]</InArgument>
       </Assign.Value>
     </Assign>
     <Assign DisplayName="Transform mailDate to dd/MM/yyyy" sap:VirtualizedContainerService.HintSize="797,60" sap2010:WorkflowViewState.IdRef="Assign_1">
