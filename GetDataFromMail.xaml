@@ -5,7 +5,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Expresión regular para obtener el cuit del mail." Name="in_regexCuit" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Devuelve la fecha del mail" Name="out_mailDate" Type="OutArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1794,938</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>844,938</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -91,7 +91,7 @@
         <OutArgument x:TypeArguments="x:String">[out_mailDate]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[Split(Convert.ToDateTime(in_mail.Headers("Date")).AddHours(-3).ToString)(0)]</InArgument>
+        <InArgument x:TypeArguments="x:String">[Split(Convert.ToDateTime(in_mail.Headers("Date")).ToString)(0)]</InArgument>
       </Assign.Value>
     </Assign>
     <Assign DisplayName="Transform mailDate to dd/MM/yyyy" sap:VirtualizedContainerService.HintSize="797,60" sap2010:WorkflowViewState.IdRef="Assign_1">
