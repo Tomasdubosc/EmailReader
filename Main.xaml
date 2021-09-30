@@ -89,7 +89,6 @@
       <AssemblyReference>UiPath.GSuite</AssemblyReference>
       <AssemblyReference>Google.Apis.Auth</AssemblyReference>
       <AssemblyReference>UiPath.GSuite.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -343,7 +342,7 @@
                                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
-                                          <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Procesados&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_10" MailFolder="[config(&quot;processedFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="Auto" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
+                                          <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Procesados&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_10" MailFolder="[config(&quot;processedFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="SslOnConnect" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
                                           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Mailed moved to: '&quot;+ config(&quot;processedFolder&quot;).ToString + &quot;' folder...&quot;]" />
                                         </Sequence>
                                       </TryCatch.Try>
@@ -436,7 +435,7 @@
                                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
-                                            <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to Custom Tag" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_12" MailFolder="[gmailBlacklistTag]" MailMessage="[mail]" Port="993" SecureConnection="Auto" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
+                                            <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to Custom Tag" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_12" MailFolder="[gmailBlacklistTag]" MailMessage="[mail]" Port="993" SecureConnection="SslOnConnect" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
                                             <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;Mail moved to: '&quot;+ gmailBlacklistTag + &quot;' folder...&quot;]" />
                                           </Sequence>
                                         </TryCatch.Try>
@@ -444,7 +443,7 @@
                                           <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="486,1016" sap2010:WorkflowViewState.IdRef="Catch`1_9">
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
@@ -467,7 +466,7 @@
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                         </scg:Dictionary>
                                                       </sap:WorkflowViewStateService.ViewState>
-                                                      <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;ListaNegraCuits&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_11" MailFolder="[config(&quot;blacklistFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="Auto" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
+                                                      <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;ListaNegraCuits&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_11" MailFolder="[config(&quot;blacklistFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="SslOnConnect" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
                                                       <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Mail moved to: '&quot;+ config(&quot;blacklistFolder&quot;).ToString + &quot;' folder...&quot;]" />
                                                     </Sequence>
                                                   </TryCatch.Try>
@@ -503,7 +502,7 @@
                             <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="1497,964" sap2010:WorkflowViewState.IdRef="Catch`1_4">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
@@ -531,7 +530,7 @@
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Excepciones&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_8" MailFolder="[config(&quot;exceptionFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="Auto" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
+                                        <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Excepciones&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_8" MailFolder="[config(&quot;exceptionFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="SslOnConnect" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
                                         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Mailed move to: '&quot;+ config(&quot;exceptionFolder&quot;).ToString + &quot;' folder...&quot;]" />
                                       </Sequence>
                                     </TryCatch.Try>
@@ -581,7 +580,7 @@
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Otros&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_9" MailFolder="[config(&quot;otherFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="Auto" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
+                              <ui:MoveIMAPMailMessageToFolder Password="{x:Null}" DisplayName="Move mail to &quot;Otros&quot;" Email="[mailUsername]" EnableSSL="True" FromFolder="Inbox" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="MoveIMAPMailMessageToFolder_9" MailFolder="[config(&quot;otherFolder&quot;).ToString]" MailMessage="[mail]" Port="993" SecureConnection="SslOnConnect" SecurePassword="[mailPassword]" Server="imap.gmail.com" />
                               <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Mail moved to: &quot;+ config(&quot;otherFolder&quot;).ToString]" />
                             </Sequence>
                           </TryCatch.Try>
